@@ -26,19 +26,20 @@ using namespace std;
 //Math/Physics/Conversions/Higher Dimensions - i.e. PI, e, etc...
 
 //Function Prototypes
-void decision(){
-     
-    char opt = 'H'||'h';
-    int p1Tot;
-        int nxCard=rand()%10 +2;
-        p1Tot += (nxCard>=10?10:nxCard);
-            if(p1Tot <=21){
-                cout << "Here is your next card.\n";
-                cout << "You have a total of " << p1Tot << "." <<endl;
-                cout << "Would you like to hit or stand?"<<endl;
-                cin >> opt; 
-            }
-    }
+void gCard(){
+    cout <<"Here is your next card.\n";
+}
+void nGains(){
+    cout << "Net Gain/Loss = $ ";
+}
+void moola(int wagMon){
+    
+    cout << endl;
+    cout << setprecision(2) << fixed;
+    cout <<"\t\t\t\tYou have entered $ " <<wagMon<<endl;
+   
+}    
+
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -94,12 +95,8 @@ int main(int argc, char** argv) {
     while (start){ //repeat the bool until told to stop
         
     cout <<"Enter the amount of money you would like to wager!"<<endl<<endl;
-    cin >> wagMon1; 
-    wagMon = wagMon1;
-    cout << endl;
-    cout << setprecision(2) << fixed;
-    cout <<"\t\t\t\tYou have entered $ " <<wagMon<<endl;
-   
+    cin>>wagMon;
+    moola(wagMon);
     
     cout << "===============================================================\n";
     
@@ -176,9 +173,18 @@ int main(int argc, char** argv) {
     cout <<endl;
     cout <<"================================================================\n";
     
-while((opt == 'H' || opt == 'h') && (p1Tot <=21)){ //giving cards when num < 21{   
-void decision();  
-}
+while((opt == 'H' || opt == 'h') && (p1Tot <=21)){ //giving cards when num < 21
+       
+        int nxCard=rand()%10 +2;
+        p1Tot += (nxCard>=10?10:nxCard);
+            if(p1Tot <=21){
+                gCard();
+                cout << "You have a total of " << p1Tot << "." <<endl;
+                cout << "Would you like to hit or stand?"<<endl;
+                cin >> opt; 
+            }
+    } 
+   
     
     cout << endl;
     cout <<"=================================================================\n";
@@ -206,7 +212,8 @@ void decision();
             cout << "Your Hand: " << p1Tot << endl << endl;
             cout << "Dealers Hand: " << dlrTot << endl << endl;
     for (int i=0; i<wagMon; save+=1, i++); 
-            cout << "Net Gain/Loss = $ " << save << endl; 
+            nGains();
+            cout << save << endl; 
     cout <<"=================================================================\n";
             cout << endl;
             start = false;
@@ -237,7 +244,8 @@ void decision();
             cout << "Your Hand: " << p1Tot << endl << endl;
             cout << "Dealers Hand: " << dlrTot << endl << endl;
             for (int i=0; i<wagMon; save-=1, i++); 
-            cout << "Net Gain/Loss = $ " << save << endl;
+            nGains();
+            cout << save << endl;
     cout <<"=================================================================\n";        
             cout << endl;
             start = false;
@@ -273,7 +281,8 @@ void decision();
             cout << "Dealers Hand: " << dlrTot << endl;
             cout << endl;
         for (int i=0; i<wagMon; save-=1, i++); 
-        cout << "Net Gain/Loss = $ " << save << endl;
+        nGains();
+            cout << save << endl; 
     cout <<"=================================================================\n";
     cout << endl;
         start = false;
@@ -307,7 +316,8 @@ else if (isgreater(p1Tot, dlrTot) && islessequal(dlrTot, 21) && islessequal(p1To
             cout << "Dealers Hand: " << dlrTot << endl;
             cout << endl;
         for (int i=0; i<wagMon; save+=1, i++); 
-        cout << "Net Gain/Loss = $ " << save << endl;
+        nGains();
+            cout << save << endl;
     cout <<"=================================================================\n";
     cout << endl;
         start = false;
@@ -340,7 +350,8 @@ else if (isgreater(p1Tot, dlrTot) && islessequal(dlrTot, 21) && islessequal(p1To
         cout << "Your Hand: " << p1Tot << endl << endl;
         cout << "Dealers Hand: " << dlrTot << endl << endl;
     for (int i=0; i<wagMon; save-=1, i++); 
-        cout << "Net Gain/Loss = $ " << save << endl;
+        nGains();
+            cout << save << endl;
     cout <<"=================================================================\n";
     cout << endl;
         start = false;
@@ -372,7 +383,8 @@ else if (isgreater(p1Tot, dlrTot) && islessequal(dlrTot, 21) && islessequal(p1To
             cout << "Your Hand: " << p1Tot << endl << endl;
             cout << "Dealers Hand: " << dlrTot << endl << endl;
         for (int i=0; i<wagMon; save-=1, i++); 
-            cout << "Net Gain/Loss = $ " << save << endl;
+            nGains();
+            cout << save << endl;
     cout <<"=================================================================\n";
     cout << endl;
         start = false;
@@ -406,7 +418,8 @@ else if (isgreater(p1Tot, dlrTot) && islessequal(dlrTot, 21) && islessequal(p1To
         cout << "Your Hand: " << p1Tot << endl << endl;        
         cout << "Dealers Hand: " << dlrTot << endl << endl;
         for (int i=0; i<wagMon; wagMon1+=1, i++); 
-            cout << "Net Gain/Loss = $ " << wagMon1 << endl;
+           nGains();
+            cout << wagMon1 << endl;
     cout <<"=================================================================\n";
         cout << endl;
         start = false;
@@ -440,7 +453,8 @@ else if (isgreater(p1Tot, dlrTot) && islessequal(dlrTot, 21) && islessequal(p1To
             cout << "Your Hand: " << p1Tot << endl << endl;
             cout << "Dealers Hand: " << dlrTot << endl << endl;
         for (int i=0; i<wagMon; wagMon1+=1, i++); 
-            cout << "Net Gain/Loss = $ " << wagMon1 << endl;
+            nGains();
+            cout << wagMon1 << endl;
     cout <<"=================================================================\n";  
         cout << endl;
         start = false;
@@ -471,7 +485,8 @@ else if (isgreater(p1Tot, dlrTot) && islessequal(dlrTot, 21) && islessequal(p1To
         cout << "Tie Game!" <<endl<<endl;
         cout << "Your Hand: " << p1Tot << endl << endl;        
         cout << "Dealers Hand: " << dlrTot << endl << endl;
-        cout << "Net Gain/Loss = $ " << wagMon1 << endl;
+        nGains();
+            cout << wagMon1 << endl;
     cout <<"=================================================================\n";    
     cout << endl;
     start = false; 
@@ -503,7 +518,8 @@ else if (isgreater(p1Tot, dlrTot) && islessequal(dlrTot, 21) && islessequal(p1To
         cout << "Tie Game!" <<endl<<endl;
         cout << "Your Hand: " << p1Tot << endl << endl;        
         cout << "Dealers Hand: " << dlrTot << endl << endl;
-        cout << "Net Gain/Loss = $ " << wagMon1 << endl;
+        nGains();
+            cout << wagMon1 << endl;
     cout <<"=================================================================\n";\
     cout << endl;
     start = false; 
