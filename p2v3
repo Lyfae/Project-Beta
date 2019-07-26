@@ -1,0 +1,637 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
+ * File:   main.cpp
+ * Author: paulthai
+ *
+ * Created on July 15, 2019, 6:21 PM
+ */
+
+//System Libraries
+#include <iostream>  //Input/Output Library
+#include <cstdlib>   //Random Number generation
+#include <ctime>     //Setting random seed with time
+#include <iomanip>   //Set the decimal places
+#include <string>    //words
+#include <cmath>     // write equations
+using namespace std;
+
+//User Libraries
+
+//Global Constants, no Global Variables are allowed
+//Math/Physics/Conversions/Higher Dimensions - i.e. PI, e, etc...
+
+//Function Prototypes
+//giving the player the next card
+void gCard(){
+    cout <<"Here is your next card.\n";
+}
+void nGains(){
+    cout << "Net Gain/Loss = $ ";
+}
+void stop(){
+    exit(0);
+    cout <<"This sentence will never be read"<<endl;
+}
+int cD(int arr[],int size){
+    char face, suit;
+    for(char card=0;card<52;card++){
+        switch(card%13){
+            case 0: face='A';break;
+            case 1: face='2';break;
+            case 2: face='3';break;
+            case 3: face='4';break;
+            case 4: face='5';break;
+            case 5: face='6';break;
+            case 6: face='7';break;
+            case 7: face='8';break;
+            case 8: face='9';break;
+            case 9: face='T';break;
+            case 10: face='J';break;
+            case 11: face='Q';break;
+            case 12: face='K';break;
+            default: face='?';
+        }
+        if(card<13)     suit='S';//Spades
+        else if(card<26)suit='D';//Diamonds
+        else if(card<39)suit='C';//Clubs
+        else            suit='H';//Hearts
+        cout<<"|"<<face<<suit<<"| ";
+        if(card%13==12) cout<<endl;
+    }
+}
+float moola(float wagMon=0){
+    wagMon = wagMon * 1;
+    cout << endl;
+    cout << setprecision(2) << fixed;
+    cout <<"\t\t\t\tYou have entered $ " <<wagMon<<endl;
+    return wagMon;
+}
+int moola(int &wagMon1){
+    wagMon1 *= 1;
+    cout << endl;
+    cout << setprecision(2) << fixed;
+    cout <<"\t\t\t\tYou have entered $ " <<wagMon1<<endl;
+    return wagMon1;
+}
+bool go(char opt){
+    bool begin;
+    opt =='2' ? begin == false : begin == true;
+    return begin;
+    exit(0);
+}
+string name(string nam){
+    return nam;
+}
+
+
+//Execution Begins Here!
+int main(int argc, char** argv) {
+    //Set the random number seed
+    srand(static_cast<unsigned int>(time(0)));
+    
+    //Declare Variables
+    string nam;
+    char opt,card, face;
+    int wagMon1;
+    int arr[13];
+    float wagMon;
+    bool start = false; 
+    int save =0;
+    int num[1] = {1};   //parallel array
+    int num1[1] = {21}; //parallel array
+    
+    
+    cout <<"===============================================================\n";
+    cout <<"             Welcome to the game of BlackJack!                 \n"; 
+    cout << "          +------------+              +------------+\n";
+    cout << "          |            |              |            |\n";
+    cout <<setw(11)<<"|"<<setw(7)<<num[0]<<setw(6)<<"|"<<setw(15)<<"|"<<setw(7)
+            <<num1[0]<<setw(7)<<" |\n";
+    cout << "          |            |              |            |\n";
+    cout << "          +------------+              +------------+\n";
+    cout <<"===============================================================\n";
+    cout <<"To first start, please enter your name."<<endl;
+    cin>>nam;
+    name(nam);
+        
+    cout << "===============================================================\n";
+    cout << endl;
+    
+    cout << "                      Hello " << nam << "!"<< endl <<endl;
+    cout <<"=================================================================\n";
+    cout << endl;
+    cout <<"Please check the cards to see that all are present."<<endl;
+    cout <<"=================================================================\n";
+    cD(arr,13);
+    cout <<"=================================================================\n";
+    cout <<"Are you sure you want to proceed?"<<endl;
+    cout <<"Type Y to continue or X to quit game.\n";
+    
+    cin >> opt; 
+ 
+    if(opt == 'Y' || opt== 'y'){
+        cout <<"Let's Begin!"<< endl;
+    }
+    else {
+        cout <<"Game Over!\n\n";
+        return 0;}
+    
+    cout << endl;
+    cout <<"=================================================================\n";
+  
+    //bool to loop the start
+    start = opt == 'Y' || opt== 'y';    
+    
+        // terminate if they say no
+    if (!start){
+        cout << endl;
+        cout << "Thank You For Playing!" << endl;
+        return 0;
+    }
+    while (start){ //repeat the bool until told to stop
+        
+     
+    cout <<"Enter the amount of money you would like to wager!"<<endl<<endl;
+    cin>>wagMon;
+    moola(wagMon);  
+    cout << "===============================================================\n";
+    
+    int p1_card1 = rand() % 13 +1;
+    int p1_card2 = rand() % 13 +1;
+    int d_card1 = rand() % 13 +1;
+    int d_card2 = rand() % 13 +1;
+    int dlrTot;
+    int p1Tot =0;
+    p1Tot = (p1_card1>=10?10:p1_card1) + (p1_card2>=10?10:p1_card2);
+    dlrTot = (d_card1>=10?10:d_card1) + (d_card2>=10?10:d_card2);
+    
+    cout << "The dealer will deal out the cards." << endl<<endl;
+    
+    cout <<"In your hand you have:"<<endl;
+    
+switch(p1_card1){ //randomize 1st card for p1 
+        case 1: 
+            cout << "Ace and ";break;
+        case 11: 
+            cout << "Jack and "; break;
+        case 12:
+            cout << "Queen and "; break;
+        case 13: 
+            cout << "King and "; break;
+        default: 
+            cout << p1_card1 << " and "; break;
+    }
+    
+    switch(p1_card2){ //randomize 2nd card for p1 
+        case 1: 
+            cout << "Ace ";break;
+        case 11: 
+            cout << "Jack "; break;
+        case 12:
+            cout << "Queen "; break;
+        case 13: 
+            cout << "King "; break;
+        default: 
+            cout << p1_card2<<endl; break;
+    }
+    cout << endl;
+    cout <<"In the dealer's hand they have"<<endl;
+    
+    switch(d_card1){ //randomize 1st card for dealer 
+        case 1: 
+            cout << "Ace and ";break;
+        case 11: 
+            cout << "Jack and "; break;
+        case 12:
+            cout << "Queen and "; break;
+        case 13: 
+            cout << "King and "; break;
+        default: 
+            cout <<d_card1 << " and "; break;
+    }
+    
+        switch(d_card2){ //randomize 2nd card for dealer 
+        case 1: 
+            cout << "Ace ";break;
+        case 11: 
+            cout << "Jack "; break;
+        case 12:
+            cout << "Queen "; break;
+        case 13: 
+            cout << "King "; break;
+        default: 
+            cout << d_card2<<endl; break;
+    }
+    cout << "===============================================================\n";
+    cout << endl;
+    cout << "What would you like to to do? Type H to Hit or S to stand." << endl;
+    cin >> opt;
+    cout <<endl;
+    cout <<"================================================================\n";
+    
+while((opt == 'H' || opt == 'h') && (p1Tot <=21)){ //giving cards when num < 21
+       
+        int nxCard=rand()%10 +2;
+        p1Tot += (nxCard>=10?10:nxCard);
+            if(p1Tot <=21){
+                gCard();
+                cout << "You have a total of " << p1Tot << "." <<endl;
+                cout << "Would you like to hit or stand?"<<endl;
+                cin >> opt; 
+            }
+    } 
+   
+    
+    cout << endl;
+    cout <<"=================================================================\n";
+    cout<<"You have a total of: " << p1Tot<< endl; 
+    
+    //the dealer hits himself when he is below 17
+    if(dlrTot >= 17)cout <<"The dealer has a total of: " << dlrTot <<endl <<endl;
+    
+    else{
+        do{ 
+            int nxCard=rand()%11 +1;
+            dlrTot += (nxCard>=10?10:nxCard);
+            cout <<"The dealer has a total of: " << dlrTot <<endl;
+        }while(dlrTot <17);
+    }
+    cout << endl;
+    cout <<"=================================================================\n";
+    cout <<"=================================================================\n";
+    
+    //dealer bust
+    if (dlrTot > 21 && p1Tot <=21){
+            cout << nam << " You Win!" << endl;
+            cout <<"The Dealer Bust!"<<endl;
+            cout <<"Here is your Prize Money!"<<endl;
+            cout <<"$ "<<wagMon<<endl;
+            cout << "Your Hand: " << p1Tot << endl << endl;
+            cout << "Dealers Hand: " << dlrTot << endl << endl;
+    for (int i=0; i<wagMon; save+=1, i++); 
+            nGains();
+            cout << save << endl; 
+    cout <<"=================================================================\n";
+            cout << endl;
+            start = false;
+                    
+            do{   
+                cout << "Would you like to play another game? ( Y / X ): \n";            
+                cin >> opt;
+                go(opt);
+                start = opt == 'Y' || opt == 'y';
+                
+                if (opt == 'X' || opt == 'x'){
+                cout <<"------------------------------------------------"<< endl;
+                    cout << "See you soon " << nam << "!" << endl;
+                cout <<"------------------------------------------------"<< endl;    
+                    return 0;
+                }           
+                
+                // error is player doesn't input from options given
+                else if (opt != 'Y' && opt != 'y' && opt != 'X' && opt != 'x'){
+                    cout << endl;
+                    cout << "Input the Corresponding Letters Above!" << endl;
+                    cout << endl;
+                }
+                           
+            } while (!start);        
+    }
+    //player bust
+    if (p1Tot > 21){
+            cout << nam << ", You Bust!" << endl;
+            cout << "Your Hand: " << p1Tot << endl << endl;
+            cout << "Dealers Hand: " << dlrTot << endl << endl;
+            for (int i=0; i<wagMon; save-=1, i++); 
+            nGains();
+            cout << save << endl;
+    cout <<"=================================================================\n";        
+            cout << endl;
+            start = false;
+            
+            do{   
+                cout << "Would you like to play another game? ( Y / X ): \n";            
+                cin >> opt;  
+                go(opt);
+                start = opt == 'Y' || opt == 'y';
+                
+                if (opt == 'X' || opt == 'x'){
+                cout <<"------------------------------------------------"<< endl;
+                    cout << "See you soon " << nam << "!" << endl;
+                cout <<"------------------------------------------------"<< endl;    
+                    return 0;
+                }           
+                
+                // error is player doesn't input from options given
+                else if (opt != 'Y' && opt != 'y' && opt != 'X' && opt != 'x'){
+                    cout << endl;
+                    cout << "Input the Corresponding Letters Above!" << endl;
+                    cout << endl;
+                }
+                           
+            } while (!start);  
+        }
+ 
+//standing case    
+ if(opt == 'S' || opt == 's'){ //player stands
+        //dealer wins
+ if(dlrTot > p1Tot && p1Tot <= 21 && dlrTot <= 21){
+            cout << nam << " You Lost!" << endl;
+            cout << endl;
+            cout << "Your Hand: " << p1Tot << endl;
+            cout << endl;
+            cout << "Dealers Hand: " << dlrTot << endl;
+            cout << endl;
+        for (int i=0; i<wagMon; save-=1, i++); 
+        nGains();
+            cout << save << endl; 
+    cout <<"=================================================================\n";
+    cout << endl;
+        start = false;
+        
+        do{   
+                cout << "Would you like to play another game? ( Y / X ): \n";            
+                cin >> opt;  
+                go(opt);
+                start = opt == 'Y' || opt == 'y';
+                
+                if (opt == 'X' || opt == 'x'){
+                cout <<"------------------------------------------------"<< endl;
+                    cout << "See you soon " << nam << "!" << endl;
+                cout <<"------------------------------------------------"<< endl;    
+                    return 0;
+                }           
+                
+                // error is player doesn't input from options given
+                else if (opt != 'Y' && opt != 'y' && opt != 'X' && opt != 'x'){
+                    cout << endl;
+                    cout << "Input the Corresponding Letters Above!" << endl;
+                    cout << endl;
+                }
+                           
+            } while (!start); 
+ }
+else if (isgreater(p1Tot, dlrTot) && islessequal(dlrTot, 21) && islessequal(p1Tot, 21)){
+       //player wins
+            cout << nam << " You Won!" << endl;
+            cout << endl;
+            cout << "Your Hand: " << p1Tot << endl;
+            cout << endl;
+            cout << "Dealers Hand: " << dlrTot << endl;
+            cout << endl;
+        for (int i=0; i<wagMon; save+=1, i++); 
+        nGains();
+            cout << save << endl;
+    cout <<"=================================================================\n";
+    cout << endl;
+        start = false;
+        
+        do{   
+                cout << "Would you like to play another game? ( Y / X ): \n";            
+                cin >> opt;     
+                go(opt);
+                start = opt == 'Y' || opt == 'y';
+                
+                if (opt == 'X' || opt == 'x'){
+                cout <<"------------------------------------------------"<< endl;
+                    cout << "See you soon " << nam << "!" << endl;
+                cout <<"------------------------------------------------"<< endl;    
+                    return 0;
+                }           
+                
+                // error is player doesn't input from options given
+                else if (opt != 'Y' && opt != 'y' && opt != 'X' && opt != 'x'){
+                    cout << endl;
+                    cout << "Input the Corresponding Letters Above!" << endl;
+                    cout << endl;
+                }
+                           
+            } while (!start); 
+        }            
+    }
+    //player loses
+    if(dlrTot > p1Tot && p1Tot < 21 && dlrTot <=21){
+        cout << nam << ", You lost!"<<endl;
+        cout << nam <<", You lost: $ " <<wagMon <<endl; 
+        cout << "Your Hand: " << p1Tot << endl << endl;
+        cout << "Dealers Hand: " << dlrTot << endl << endl;
+    for (int i=0; i<wagMon; save-=1, i++); 
+        nGains();
+            cout << save << endl;
+    cout <<"=================================================================\n";
+    cout << endl;
+        start = false;
+        
+        do{   
+                cout << "Would you like to play another game? ( Y / X ): \n";            
+                cin >> opt;     
+                go(opt);
+                start = opt == 'Y' || opt == 'y';
+                
+                if (opt == 'X' || opt == 'x'){
+                cout <<"------------------------------------------------"<< endl;
+                    cout << "See you soon " << nam << "!" << endl;
+                cout <<"------------------------------------------------"<< endl;    
+                    return 0;
+                }           
+                
+                // error is player doesn't input from options given
+                else if (opt != 'Y' && opt != 'y' && opt != 'X' && opt != 'x'){
+                    cout << endl;
+                    cout << "Input the Corresponding Letters Above!" << endl;
+                    cout << endl;
+                }
+                           
+            } while (!start); 
+    
+            
+    //dealer hits blackjack
+    if(dlrTot == 21 && p1Tot < 21 || p1Tot > 21){
+            cout <<"Dealer! Blackjack!"<<endl<<endl;
+            cout << nam << ", You lost!"<<endl;
+            cout << nam <<", You lost: $ " <<wagMon <<endl; 
+            cout << "Your Hand: " << p1Tot << endl << endl;
+            cout << "Dealers Hand: " << dlrTot << endl << endl;
+        for (int i=0; i<wagMon; save-=1, i++); 
+            nGains();
+            cout << save << endl;
+    cout <<"=================================================================\n";
+    cout << endl;
+        start = false;
+        
+        do{   
+                cout << "Would you like to play another game? ( Y / X ): \n";            
+                cin >> opt;     
+                go(opt);
+                start = opt == 'Y' || opt == 'y';
+                
+                if (opt == 'X' || opt == 'x'){
+                cout <<"------------------------------------------------"<< endl;
+                    cout << "See you soon " << nam << "!" << endl;
+                cout <<"------------------------------------------------"<< endl;    
+                    return 0;
+                }           
+                
+                // error is player doesn't input from options given
+                else if (opt != 'Y' && opt != 'y' && opt != 'X' && opt != 'x'){
+                    cout << endl;
+                    cout << "See you soon " << nam << "!" << endl;
+                    cout << endl;
+                }
+                           
+            } while(!start); 
+        }
+    }
+    
+    
+    //player wins
+    if(p1Tot > dlrTot && dlrTot < 21 && p1Tot <=21){
+        cout << nam << ", You Won!" <<endl;
+        cout << nam << ", You gained: "<<"$ "<<wagMon<<endl;
+        cout << "Your Hand: " << p1Tot << endl << endl;        
+        cout << "Dealers Hand: " << dlrTot << endl << endl;
+        for (int i=0; i<wagMon; wagMon1+=1, i++); 
+           nGains();
+            cout << wagMon1 << endl;
+    cout <<"=================================================================\n";
+        cout << endl;
+        start = false;
+        
+        do{   
+                cout << "Would you like to play another game? ( Y / X ): \n";            
+                cin >> opt;     
+                go(opt);
+                start = opt == 'Y' || opt == 'y';
+                
+                if (opt == 'X' || opt == 'x'){
+                cout <<"------------------------------------------------"<< endl;
+                    cout << "See you soon " << nam << "!" << endl;
+                cout <<"------------------------------------------------"<< endl;    
+                    return 0;
+                }           
+                
+                // error is player doesn't input from options given
+                else if (opt != 'Y' && opt != 'y' && opt != 'X' && opt != 'x'){
+                    cout << endl;
+                    cout << "See you soon " << nam << "!" << endl;
+                    cout << endl;
+                }
+                           
+            } while (!start); 
+    
+    //player hits blackjack
+    if(p1Tot ==21 && dlrTot < 21 || dlrTot > 21){
+            cout << nam <<"! Blackjack!"<<endl<<endl;;
+            cout << nam << ", You Won!"<<endl;
+            cout << nam << ", You gained: "<< endl;
+            cout <<"$ "<<wagMon<<endl;
+            cout << "Your Hand: " << p1Tot << endl << endl;
+            cout << "Dealers Hand: " << dlrTot << endl << endl;
+        for (int i=0; i<wagMon; wagMon1+=1, i++); 
+            nGains();
+            cout << wagMon1 << endl;
+    cout <<"=================================================================\n";  
+        cout << endl;
+        start = false;
+        
+        do{   
+                cout << "Would you like to play another game? ( Y / X ): \n";            
+                cin >> opt;     
+                go(opt);
+                start = opt == 'Y' || opt == 'y';
+                
+                if (opt == 'X' || opt == 'x'){
+                cout <<"------------------------------------------------"<< endl;
+                    cout << "See you soon " << nam << "!" << endl;
+                cout <<"------------------------------------------------"<< endl;    
+                    return 0;
+                }           
+                
+                // error is player doesn't input from options given
+                else if (opt != 'Y' && opt != 'y' && opt != 'X' && opt != 'x'){
+                    cout << endl;
+                    cout << "Input the Corresponding Letters Above!" << endl;
+                    cout << endl;
+                }
+                           
+            } while (!start); 
+        }
+    }
+    
+    
+    if(p1Tot == dlrTot){ //if both players tie
+        cout << "Tie Game!" <<endl<<endl;
+        cout << "Your Hand: " << p1Tot << endl << endl;        
+        cout << "Dealers Hand: " << dlrTot << endl << endl;
+        nGains();
+            cout << wagMon1 << endl;
+    cout <<"=================================================================\n";    
+    cout << endl;
+    start = false; 
+    
+        do{   
+                cout << "Would you like to play another game? ( Y / X ): \n";            
+                cin >> opt;   
+                go(opt);
+                start = opt == 'Y' || opt == 'y';
+                
+                if (opt == 'X' || opt == 'x'){
+                cout <<"------------------------------------------------"<< endl;
+                    cout << "See you soon " << nam << "!" << endl;
+                cout <<"------------------------------------------------"<< endl;    
+                    return 0;
+                }           
+                
+                // error is player doesn't input from options given
+                else if (opt != 'Y' && opt != 'y' && opt != 'X' && opt != 'x'){
+                    cout << endl;
+                    cout << "Input the Corresponding Letters Above!" << endl;
+                    cout << endl;
+                }
+                           
+            } while (!start); 
+    }
+    
+    
+    if(p1Tot > 21 && dlrTot > 21){ //both dealer and player goes above 21
+        cout << "Both players are above 21!" <<endl;
+        cout << "Tie Game!" <<endl<<endl;
+        cout << "Your Hand: " << p1Tot << endl << endl;        
+        cout << "Dealers Hand: " << dlrTot << endl << endl;
+        nGains();
+            cout << wagMon1 << endl;
+    cout <<"=================================================================\n";\
+    cout << endl;
+    start = false; 
+    
+        do{   
+                cout << "Would you like to play another game? ( Y / X ): \n";            
+                cin >> opt;
+                go(opt);
+                start = opt == 'Y' || opt == 'y';
+                
+                if (opt == 'X' || opt == 'x'){
+                cout <<"------------------------------------------------"<< endl;
+                    cout << "See you soon " << nam << "!" << endl;
+                cout <<"------------------------------------------------"<< endl;    
+                    return 0;
+                }           
+                
+                // error is player doesn't input from options given
+                else if (opt != 'Y' && opt != 'y' && opt != 'X' && opt != 'x'){
+                    cout << endl;
+                    cout << "Input the Corresponding Letters Above!" << endl;
+                    cout << endl;
+                }
+                           
+            } while (!start); 
+    }
+    }
+    stop();
+    return 0;
+} 
